@@ -1,33 +1,48 @@
-//uc3
-// using random function to get the numbers between 1 to 6
-var currentPosition = 0;
-var snake=1;
-var ladder=2;
-var noPlay=0;
-console.log("Current position of player : " + currentPosition);
-function checkForOption()
+//uc4
+// Repeat till player reaches the wining position 100
+var playerPosition=0;
+ var result;
+function snake(result)
 {
-    var ran=Math.floor((Math.random() * 6) + 1);
-    console.log("the value appeared after rolling the dice is : " + ran );
-    var check=Math.floor((Math.random() * 10) % 3);
-    console.log("the option is : " + check);
+   playerPosition=playerPosition-result;
+    return playerPosition;
+}
+function ladder(result)
+{
+    playerPosition=playerPosition+result;
+    return playerPosition;
+}
+var currentposition=0;
+var noplay=0;
+var snakePosition=1;
+var ladderPosition=2;
+while(playerPosition<=100)
+{
+    result=Math.floor(Math.random()*10)%6+1;
+    console.log("Dice rolling result is " + result);
+    var check=Math.floor(Math.random()*10)%3;
+    // checking snake ladder or noplay;
     switch(check)
     {
-        case noPlay:
-            currentPosition = 0;
-            console.log("player's current position is : " + currentPosition);
-            break;
-        case snake:
-            currentPosition -= ran;
-            console.log("player's current position is : " + currentPosition);
-            break;
-        case ladder:
-            currentPosition += ran; 
-            console.log("player's current position is : " + currentPosition); 
-            break;
-        default:
-            console.log("nothing has changed");
-            break;
+      case noplay:
+          currentposition=playerPosition;
+          console.log("No play and player position is : " + currentposition );
+          break;
+       case snakePosition:
+           currentposition=snake(result);
+           console.log("Found Snake");
+           console.log("updated player position : " + currentposition);
+           break;
+       case ladderPosition:
+           currentposition=ladder(result);
+           console.log("Found ladder");
+           console.log("updated player position "+currentposition);
+           break;
+           default:
+    }
+    if(playerPosition<0)
+    {
+        playerPosition=0;
     }
 }
-module.exports = { checkForOption };
+module.exports = { snake, ladder };
