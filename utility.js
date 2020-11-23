@@ -1,6 +1,8 @@
-//uc4
-// Repeat till player reaches the wining position 100
+//uc6
+// number of times dice was played to win the game and position after every die roll
 var playerPosition=0;
+var WIN_POSITION = 100;
+var START_POSITION = 0;
 var result;
 function snake(result)
 {
@@ -17,7 +19,8 @@ var previourPosition=0;
 var noplay=0;
 var snakePosition=1;
 var ladderPosition=2;
-while(playerPosition != 100)
+var numberOfRolls = 0;
+while(playerPosition != WIN_POSITION)
 {   
     previourPosition = playerPosition;
     console.log("Dice is rolling.....");
@@ -43,13 +46,17 @@ while(playerPosition != 100)
            break;
            default:
     }
-    if(playerPosition < 0)
+    if(playerPosition < START_POSITION)
     {
-        playerPosition = 0;
+        playerPosition = START_POSITION;
     }
-    if(playerPosition > 100)
+    if(playerPosition > WIN_POSITION)
     {
         playerPosition = previourPosition;
     }
+    numberOfRolls++;
 }
+console.log("Player have won the game ");
+console.log("Number of dice rolls taken to win " + numberOfRolls);
+
 module.exports = { snake, ladder };
